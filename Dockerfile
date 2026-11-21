@@ -46,6 +46,11 @@ COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /app/proxy/node_modules ./proxy/node_modules
 COPY proxy/ ./proxy/
 
+# Remove npm/corepack toolchain not needed at runtime (its bundled dependency
+# tree contains the reported pacote/sigstore/ip-address/glob/minimatch CVEs)
+RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack \
+        /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack
+
 # Copy nginx configuration
 COPY .docker/nginx/nginx.conf /etc/nginx/nginx.conf
 
