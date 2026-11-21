@@ -4,10 +4,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend
-    container_name: character-generator-frontend
+    container_name: Character-Generator-Frontend
     restart: unless-stopped
     ports:
-      - "${FRONTEND_PORT:-2427}:80"
+      - 127.0.0.1:${FRONTEND_PORT:-2427}:80
     volumes:
       - ./logs:/var/log/nginx
     networks:
@@ -26,10 +26,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.proxy
-    container_name: character-generator-proxy
+    container_name: Character-Generator-Proxy
     restart: unless-stopped
     ports:
-      - "${PROXY_PORT:-2426}:${PROXY_PORT:-2426}"
+      - 127.0.0.1:${PROXY_PORT:-2426}:${PROXY_PORT:-2426}
     environment:
       - NODE_ENV=production
       - PORT=${PROXY_PORT:-2426}
