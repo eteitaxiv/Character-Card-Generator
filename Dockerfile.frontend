@@ -1,8 +1,9 @@
 # Frontend-only Dockerfile
 FROM nginx:alpine
 
-# Install curl for health checks
-RUN apk add --no-cache curl
+# Install curl for health checks and upgrade base packages to latest fixed versions
+RUN apk add --no-cache curl && \
+    apk upgrade --no-cache
 
 # Copy nginx configuration
 COPY .docker/nginx/nginx-frontend.conf /etc/nginx/nginx.conf

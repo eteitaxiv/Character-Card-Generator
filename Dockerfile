@@ -1,5 +1,5 @@
 # Use Ubuntu base for better compatibility
-FROM node:18-bullseye AS base
+FROM node:22-bookworm AS base
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
@@ -31,7 +31,7 @@ RUN mkdir -p /dist && \
     cp -r src/* index.html favicon.png /dist/
 
 # Production stage
-FROM node:18-bullseye AS production
+FROM node:22-bookworm AS production
 
 # Install nginx and curl
 RUN apt-get update && apt-get install -y \
